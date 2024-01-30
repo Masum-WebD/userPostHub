@@ -23,8 +23,7 @@ class User extends Authenticatable
         'otp',
     ];
 
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    //     'password' => 'hashed',
-    // ];
+    function posts(){
+        $this->hasMany(User::class, 'id');
+    }
 }

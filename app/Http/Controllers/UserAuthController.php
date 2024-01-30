@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserAuthController extends Controller
 {
-    function signup()
+    public function signup()
     {
         return view('page.auth.signUp');
     }
 
-    function registration(Request $request)
+    public function registration(Request $request)
     {
         // dd($request);
         try {
@@ -38,11 +38,11 @@ class UserAuthController extends Controller
         }
     }
 
-    function login(Request $request)
+    public function login(Request $request)
     {
         return view('page.auth.login');
     }
-    function loginStore(Request $request)
+    public function loginStore(Request $request)
     {
         try {
             $request->validate([
@@ -61,6 +61,12 @@ class UserAuthController extends Controller
         } catch (Exception $e)  {
             return response()->json(['status' => 'error', 'message' =>$e->getMessage()]);
         }
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('login');
     }
 
 

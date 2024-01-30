@@ -17,7 +17,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="{{url('all_post')}}" aria-current="page">Post</a>
+                                <a class="nav-link " href="{{url('dashboard/post')}}" aria-current="page">Post</a>
                             </li>
                         </ul>
                     </div>
