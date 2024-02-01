@@ -16,7 +16,6 @@ class UserAuthController extends Controller
 
     public function registration(Request $request)
     {
-        // dd($request);
         try {
             $request->validate([
                 'firstName' => 'required|string|max:100',
@@ -32,7 +31,7 @@ class UserAuthController extends Controller
             ]);
             auth()->attempt($request->only('email','password'));
 
-            return redirect()->route('dashboard');
+            return redirect()->route('post.list');
         } catch (Exception $e) {
             return response()->json(['status' => 'error', 'message' =>$e->getMessage()]);
         }
@@ -42,7 +41,7 @@ class UserAuthController extends Controller
     {
         return view('page.auth.login');
     }
-    public function loginStore(Request $request)
+    public function store(Request $request)
     {
         try {
             $request->validate([
@@ -56,7 +55,7 @@ class UserAuthController extends Controller
             }
             auth()->attempt($request->only('email','password'));
 
-            return redirect()->route('dashboard');
+            return redirect()->route('post.list');
 
         } catch (Exception $e)  {
             return response()->json(['status' => 'error', 'message' =>$e->getMessage()]);

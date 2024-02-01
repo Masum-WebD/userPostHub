@@ -13,9 +13,8 @@ class PostController extends Controller
     {
         $user = Auth::id();
         $posts = Post::where('user_id', $user)->get();
-        if($request->filter_date){
-            $posts = Post::where('user_id', $user)->whereDate('created_at', $request->filter_date)->get();
-            // dd($posts);
+        if($request->input('filter_date')){
+            $posts = Post::whereDate('created_at', $request->filter_date)->get();
         };
 
         return view('page.dashboard.post.show')->with('posts', $posts);
@@ -34,7 +33,6 @@ class PostController extends Controller
                 'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'status' => 'required|boolean'
             ]);
-            // dd($request);
             if ($request->hasFile('img')) {
                 $image = $request->file('img');
                 $fileNameStore = 'img' . md5(uniqid()) . time() . '.' . $image->getClientOriginalExtension();
@@ -75,6 +73,7 @@ class PostController extends Controller
                 $fileNameStore = 'img' . md5(uniqid()) . time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('upload/img/'), $fileNameStore);
             }
+
             $post = Post::find($id);
 
 

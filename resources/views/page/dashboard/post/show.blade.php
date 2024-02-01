@@ -5,18 +5,19 @@
     <section>
         <div class="mx-5">
             <h2>Post Page</h2>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <form action="{{ route('dashboard.post') }}" method="GET">
+            <div class="row mb-3 mt-2">
+                <div class="col-md-4">
+                    <form action="{{ route('post.list') }}" method="GET" class="d-flex">
                         <div class="input-group">
                             <span class="input-group-text">Filter by Date</span>
-                            <input type="date" class="form-control" name="filter_date">
+                            <input type="date" class="form-control" name="filter_date" value="{{ request('filter_date') }}">
                         </div>
-                        <button ttype="submit" class="btn btn-primary" >Search</button>
+                        <button type="submit" class="btn btn-primary mr-2">Search</button>
+                        <button type="submit" class="btn btn-danger" id="resetBtn">Reset</button>
                     </form>
 
                 </div>
-                <div class="col-md-6 text-end">
+                <div class="col-md-8 text-end">
                     <a href="{{ url('dashboard/post/create') }}" class="btn btn-primary">Create New Post</a>
                 </div>
             </div>
@@ -63,4 +64,6 @@
         </div>
         </div>
     </section>
+
+
 @endsection

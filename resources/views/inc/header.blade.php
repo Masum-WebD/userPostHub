@@ -16,9 +16,7 @@
                                 height="30" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-
-                            <a class="dropdown-item" href="{{url('dashboard/profile')}}">Profile</a>
-                            <a class="dropdown-item" href="{{url('dashboard')}}">Dashboard</a>
+                            <a class="dropdown-item" href="{{route('post.list')}}">Dashboard</a>
                             <div class="dropdown-divider"></div>
 
                             <form action="{{route('logout')}}" method="POST" >

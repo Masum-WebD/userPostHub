@@ -1,5 +1,6 @@
 @extends('layouts.app')
-{{-- @extends('page.dashboard.dashboard') --}}
+{{-- dashboard side bar --}}
+{{-- @include('page.dashboard.dashboard') --}}
 
 @section('content')
     <div class="container-fluid">
