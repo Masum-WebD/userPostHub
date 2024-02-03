@@ -3,8 +3,8 @@
 {{-- @include('page.dashboard.dashboard') --}}
 
 @section('content')
-    <div class="container-fluid">
-        <div class="col-10">
+    <div class="container mt-4">
+        <div class="col-10 ">
             <h2>Profile Details</h2>
             <hr>
 

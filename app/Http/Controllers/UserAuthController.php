@@ -29,11 +29,12 @@ class UserAuthController extends Controller
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password'))
             ]);
-            auth()->attempt($request->only('email','password'));
+            auth()->attempt($request->only('email', 'password'));
 
             return redirect()->route('post.list');
         } catch (Exception $e) {
-            return response()->json(['status' => 'error', 'message' =>$e->getMessage()]);
+            $errorMessage = $e->getMessage();
+            return redirect()->back()->with('error', $errorMessage);
         }
     }
 
@@ -50,15 +51,16 @@ class UserAuthController extends Controller
             ]);
 
             $user = User::where('email', $request->input('email'))->first();
-            if(!$user || !Hash::check($request->input('password'), $user->password)){
-                return response()->json(['status' => 'failed', 'message' => 'Invalid user']);
+            if (!$user || !Hash::check($request->input('password'), $user->password)) {
+                $errorMessage = "Invalid user! Please check your Email and Password";
+                return redirect()->back()->with('error', $errorMessage);
             }
-            auth()->attempt($request->only('email','password'));
+            auth()->attempt($request->only('email', 'password'));
 
             return redirect()->route('post.list');
-
-        } catch (Exception $e)  {
-            return response()->json(['status' => 'error', 'message' =>$e->getMessage()]);
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return redirect()->back()->with('error', $errorMessage);
         }
     }
 
@@ -67,6 +69,4 @@ class UserAuthController extends Controller
         auth()->logout();
         return redirect()->route('login');
     }
-
-
 }

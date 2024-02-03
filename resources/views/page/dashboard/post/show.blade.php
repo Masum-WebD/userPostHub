@@ -10,7 +10,8 @@
                     <form action="{{ route('post.list') }}" method="GET" class="d-flex">
                         <div class="input-group">
                             <span class="input-group-text">Filter by Date</span>
-                            <input type="date" class="form-control" name="filter_date" value="{{ request('filter_date') }}">
+                            <input type="date" class="form-control" name="filter_date"
+                                value="{{ request('filter_date') }}">
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Search</button>
                         <button type="submit" class="btn btn-danger" id="resetBtn">Reset</button>
@@ -39,7 +40,7 @@
                                 <img src="{{ asset($post->img) }}" width="50">
                             </td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->created_at }}</td>
+                            <td>{{ $post->created_at->format('d-m-Y') }}</td>
                             <td>
                                 <div class="d-flex">
                                     <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>
@@ -53,9 +54,12 @@
 
                             </td>
                             @if ($post->status == true)
-                                <td scope="col">Active</td>
+                                <td scope="col">
+                                    <button class="btn btn-primary">Active</button>
+                                </td>
                             @else
-                                <td scope="col">Inactive</td>
+                                <td scope="col">
+                                    <button class="btn btn-warning">Inactive</button></td>
                             @endif
                         </tr>
                     @endforeach
@@ -64,6 +68,11 @@
         </div>
         </div>
     </section>
-
-
 @endsection
+@push('bottom_scripts')
+    <script>
+        $('#resetBtn').on('click', function() {
+            $('input[name="filter_date"]').val('');
+        });
+    </script>
+@endpush

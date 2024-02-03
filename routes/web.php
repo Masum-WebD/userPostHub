@@ -38,4 +38,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
     Route::post('post/update/{id}', [PostController::class, 'update'])->name('post.update');
     Route::delete('post/delete/{id}', [PostController::class, 'destroy'])->name('post.delete');
+    Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
 });

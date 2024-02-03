@@ -10,13 +10,21 @@
                             <h4 class="mb-0">Sign Up</h4>
                         </div>
                         <div class="card-body">
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
+
                             <form method='post' type='submit' action='{{ route('registration.store') }}'>
                                 @csrf
                                 @method('post')
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="fw-bold">First Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter your first name" name="firstName"  required>
+                                        <input type="text" class="form-control" placeholder="Enter your first name"
+                                            name="firstName" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="fw-bold">Last Name</label>
@@ -37,7 +45,7 @@
                                 <button type="submit" class="btn btn-primary my-3">Sign Up</button>
                             </form>
                             <p>
-                                Already have an account, <a href="">Sign In</a>
+                                Already have an account, <a href="{{ url('login') }}">Sign In</a>
                             </p>
                         </div>
                     </div>

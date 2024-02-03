@@ -45,9 +45,10 @@ class PostController extends Controller
                 'img' => 'upload/img/' . $fileNameStore,
                 'status' => $request->input('status')
             ]);
-            return redirect()->route('dashboard.post');
+            return redirect()->route('post.list');
         } catch (Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            $errorMessage = $e->getMessage();
+            return redirect()->back()->with('error', $errorMessage);
         }
     }
 
@@ -55,7 +56,7 @@ class PostController extends Controller
     public function edit($id)
     {
 
-        $post = Post::find($id)->first();
+        $post = Post::find($id);
         return view('page.dashboard.post.edit')->with('post', $post);
     }
 
@@ -64,29 +65,35 @@ class PostController extends Controller
         try {
             $request->validate([
                 'title' => 'required|string|max:255',
-                'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'status' => 'required|boolean'
             ]);
 
+            $post = Post::find($id);
             if ($request->hasFile('img')) {
+                $request->validate([
+                    'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
                 $image = $request->file('img');
                 $fileNameStore = 'img' . md5(uniqid()) . time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('upload/img/'), $fileNameStore);
+                if (file_exists(public_path($post->img))) {
+                    unlink(public_path($post->img));
+                }
+                $post->img = 'upload/img/' . $fileNameStore;
             }
-
-            $post = Post::find($id);
-
-
             $post->title = $request->input('title');
             $post->user_id = $request->input('user_id');
-            $post->img = 'upload/img/' . $fileNameStore;
             $post->status = $request->input('status');
             $post->save();
-            return redirect()->route('dashboard.post');
+
+            return redirect()->route('post.list');
         } catch (Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            $errorMessage = $e->getMessage();
+            return redirect()->back()->with('error', $errorMessage);
         }
     }
+
 
     public function destroy($id)
     {

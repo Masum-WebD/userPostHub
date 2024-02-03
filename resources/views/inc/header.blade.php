@@ -1,6 +1,6 @@
 <div class="bg-danger-subtle">
     <nav class="navbar navbar-expand-lg navbar-light  container">
-        <a class="navbar-brand" href="{{url('/')}}">Home</a>
+        <a class="navbar-brand" href="{{ url('/') }}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,10 +16,11 @@
                                 height="30" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="{{route('post.list')}}">Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('post.list') }}">Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                             <div class="dropdown-divider"></div>
 
-                            <form action="{{route('logout')}}" method="POST" >
+                            <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item" href="#">Logout</button>
                             </form>

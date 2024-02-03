@@ -23,6 +23,7 @@
 
 
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
@@ -32,11 +33,8 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $('#resetBtn').on('click', function() {
-            $('input[name="filter_date"]').val('');
-        });
-    </script>
+
+    @stack('bottom_scripts')
 
     <script type="text/javascript">
         jQuery(function() {
@@ -83,12 +81,9 @@
                 table.ajax.reload();
             });
             $('#filterForm button.btn-danger').on('click', function() {
-            // Clear the date input
-            $('#filter_date').val('');
-
-            // Reload the DataTable without date filter
-            table.ajax.reload();
-        });
+                $('#filter_date').val('');
+                table.ajax.reload();
+            });
 
         });
     </script>
