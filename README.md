@@ -14,9 +14,6 @@ All user posts can be seen on the home page where Yajra Datatables to handle lar
 - [Home Route](#home-route)
 - [Data Handling](#data-handling)
 - [Framework](#framework)
-- [How to Submit](#how-to-submit)
-- [Project Submission Options](#project-submission-options)
-- [Deadline](#deadline)
 
 ## User Profile
 
